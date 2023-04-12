@@ -1,5 +1,5 @@
 resource "aws_security_group" "alb" {
-  name        = "${var.env}-alb_segrp"
+  name        = "${var.env}-${var.subnets_name}-alb_segrp"
   description = "Allow TLS inbound traffic"
   vpc_id      = var.main_vpc
 
@@ -20,7 +20,7 @@ resource "aws_security_group" "alb" {
 
   tags       = merge(
     local.common_tags,
-    { Name = "${var.env}-alb-segrp" }
+    { Name = "${var.env}-alb-${var.subnets_name}-segrp" }
   )
 }
 
