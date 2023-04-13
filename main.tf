@@ -25,7 +25,7 @@ resource "aws_security_group" "alb" {
 }
 
 resource "aws_lb" "main" {
-  name               = "${var.env}-alb"
+  name               = "${var.env}${var.subnets_name}-alb"
   internal           = var.internal
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
@@ -33,7 +33,7 @@ resource "aws_lb" "main" {
 
   tags       = merge(
 local.common_tags,
-{ Name = "${var.env}-alb" }
+{ Name = "${var.env}-${var.subnets_name}alb" }
 )
 
 }
