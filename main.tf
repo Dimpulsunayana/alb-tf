@@ -24,4 +24,18 @@ resource "aws_security_group" "alb" {
   )
 }
 
+resource "aws_lb" "main" {
+  name               = "${var.env}-alb"
+  internal           = var.internal
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.alb.id]
+  subnets            = var.subnet_ids
+
+  tags       = merge(
+local.common_tags,
+{ Name = "${var.env}-alb" }
+)
+
+}
+
 
